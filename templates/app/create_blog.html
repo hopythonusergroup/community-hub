@@ -1,0 +1,35 @@
+<form action="#" method="post">
+    {% csrf_token %}
+   
+   <div>
+    <label for="{{ form.title.id_for_label }}">Title</label>
+    {{ form.title }}
+    {% if form.title.errors %}
+        {% for error in form.title.errors %}
+            <span class="error-message">{{ error|escape }}</span>
+        {% endfor %}
+    {% endif %}
+   </div>
+
+   <div>
+    <label for="{{ form.content.id_for_label }}">Body</label>
+    {{ form.content }}
+    {% if form.content.errors %}
+        {% for error in form.content.errors %}
+            <span class="error-message">{{ error|escape }}</span>
+        {% endfor %}
+    {% endif %}
+   </div>
+
+   <div>
+    <label for="{{ form.status.id_for_label }}">Status</label>
+    {{ form.status }}
+    {% if form.status.errors %}
+        {% for error in form.status.errors %}
+            <span class="error-message">{{ error|escape }}</span>
+        {% endfor %}
+    {% endif %}
+   </div>
+
+    <input type="submit" value="Create blog">
+</form>
