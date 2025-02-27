@@ -1,0 +1,7 @@
+<p>You are about to delete the post: {{ post.title }} </p>
+<form action="{% url 'delete_blog' post_id=post.id %}" method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="Delete">
+</form>
+<a href="{% url 'blog_list' %}">Back to list</a>

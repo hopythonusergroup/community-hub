@@ -60,3 +60,14 @@ def update_blog(request, post_id):
         form = BlogPostForm(initial={"title": post.title, "content": post.content, "status": post.status})
 
     return render(request, "app/update_blog.html", {"form": form, "post": post})
+
+
+def delete_blog(request, post_id):
+    post = BlogPost.objects.get(id=post_id)
+
+    if request.method == "POST":
+        post.delete()
+
+        return redirect("blog_list")
+
+    return render(request, "app/delete_blog.html", {"post": post})
