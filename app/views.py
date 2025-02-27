@@ -37,3 +37,26 @@ def create_blog(request):
         form = BlogPostForm()
 
     return render(request, "app/create_blog.html", {"form": form})
+
+
+def update_blog(request, post_id):
+    post = BlogPost.objects.get(id=post_id)
+
+    if request.method == "POST":
+        form = BlogPostForm(request.POST, initial={"title": post.title, "content": post.content, "status": post.status})
+        if form.has_changed():
+            print("Form has changed")
+            print(form.changed_data)
+            if form.is_valid():
+                post.title = form.cleaned_data["title"]
+                post.content = form.cleaned_data["content"]
+                post.status = form.cleaned_data["status"]
+                post.save()
+
+                return redirect("blog_list")
+        else:
+            print("Form has not changed")
+    else:
+        form = BlogPostForm(initial={"title": post.title, "content": post.content, "status": post.status})
+
+    return render(request, "app/update_blog.html", {"form": form, "post": post})

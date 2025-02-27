@@ -2,6 +2,9 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.created_at }}</p>
     <p>{{ post.content }}</p>
+    <a href="{% url 'update_blog' post_id=post.id %}">Edit Post</a>
+    <a href="">Delete Post</a>
+    <a href="{% url "blog_list" %}">Back to list</a>
     {% else %}
         <p>No post found.</p>
 {% endif %}
