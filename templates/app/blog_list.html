@@ -1,4 +1,26 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+
+{% comment %} {% block title %}Post list | Community Hub{% endblock title %} {% endcomment %}
+
 <a href="{% url "create_blog" %}">Create a new post</a>
+
+{% comment %} {% block content %}
+    <h2>Blog Posts</h2>
+    
+    {% if posts %}
+        {% for post in posts %}
+            <div>
+                <h3><a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a></h3>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <a href="{% url 'update_blog' post.id %}">Edit</a>
+                <a href="{% url 'delete_blog' post.id %}">Delete</a>
+            </div>
+        {%empty%}
+            <p>no posts available</p>
+        {% endfor %}
+    {% endif %}
+{% endblock content %} {% endcomment %}
+
 
 {% if posts %}
     <ul>

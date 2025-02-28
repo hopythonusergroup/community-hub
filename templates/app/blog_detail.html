@@ -1,3 +1,18 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+
+{% comment %} {% block title %}{{ post.title }} | Community Hub{% endblock title %} {% endcomment %}
+
+{% comment %} {% block content %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+
+    <a href="{% url 'update_blog' post_id=post.id %}">Edit</a>
+    <a href="{% url 'delete_blog' post_id=post.id %}">Delete</a>
+    <a href="{% url "blog_list" %}">Back to list</a>
+{% endblock content %} {% endcomment %}
+
+
+
 {% if post %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.created_at }}</p>

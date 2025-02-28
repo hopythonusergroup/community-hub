@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Community Hub{% endblock title %}</title>
+</head>
+<body>
+    <header>
+        <h1>Community Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'create_blog' %}">Create Post</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Community Hub - Python User Group Ho project. All rights reserved.</p>
+    </footer>
+</body>
+</html>
