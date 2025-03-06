@@ -13,10 +13,20 @@
         <div class="container mx-auto flex justify-between px-4">
             <h1 class="text-2xl font-bold">Community Hub</h1>
         <nav>
-            <ul class="flex space-x-4">
-                <li><a href="{% url 'blog_list' %}" class="hover:underline">Home</a></li>
-                <li><a href="{% url 'create_blog' %}" class="hover:underline">Create Post</a></li>
-            </ul>
+            {% if user.is_authenticated %}
+                <ul class="flex space-x-4">
+                    <li><a href="{% url 'blog_list' %}" class="hover:underline">Home</a></li>
+                    <li><a href="{% url 'create_blog' %}" class="hover:underline">Create Post</a></li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                </ul>
+                {% else %}
+                <ul class="flex space-x-4">
+                    <li><a href="{% url 'login' %}" class="hover:underline">Login</a></li>
+                </ul>
+            {% endif %}
         </nav>
         </div>
     </header>
