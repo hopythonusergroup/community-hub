@@ -39,6 +39,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Project apps
     "app",
+    # Other Django apps
+    "tailwind",
+    "theme",  # a custom app for Tailwind
+    "django_browser_reload",
+]
+
+TAILWIND_APP_NAME = "theme"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -49,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "communityhub.urls"

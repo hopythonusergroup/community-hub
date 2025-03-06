@@ -1,28 +1,34 @@
-{% comment %} {% extends "base.html" %} {% endcomment %}
+{% extends "base.html" %}
 
-{% comment %} {% block title %}Post list | Community Hub{% endblock title %} {% endcomment %}
+{% block title %}Post list | Community Hub{% endblock title %}
 
-<a href="{% url "create_blog" %}">Create a new post</a>
+{% comment %} <a href="{% url "create_blog" %}">Create a new post</a> {% endcomment %}
 
-{% comment %} {% block content %}
-    <h2>Blog Posts</h2>
+{% block content %}
+    <h2 class="text-3xl font-bold mb-6">Blog Posts</h2>
     
     {% if posts %}
-        {% for post in posts %}
-            <div>
-                <h3><a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a></h3>
-                <p>{{ post.content|truncatewords:20 }}</p>
-                <a href="{% url 'update_blog' post.id %}">Edit</a>
-                <a href="{% url 'delete_blog' post.id %}">Delete</a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for post in posts %}
+            <div class="bg-white shadow-lg p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-2">
+                    <a href="{% url 'blog_detail' post.id %}" class='text-blue-600 hover:underline'>{{ post.title }}</a>
+                </h3>
+                <p class='text-gray-700'>{{ post.content|truncatewords:20 }}</p>
+                <div class='mt-4'>
+                    <a href="{% url 'update_blog' post.id %}" class='text-green-600 hover:underline'>Edit</a>
+                    <a href="{% url 'delete_blog' post.id %}" class='text-red-600 hover:underline'>Delete</a>
+                </div>
             </div>
         {%empty%}
-            <p>no posts available</p>
+            <p class='text-gray-500'>no posts available</p>
         {% endfor %}
+        </div>
     {% endif %}
-{% endblock content %} {% endcomment %}
+{% endblock content %}
 
 
-{% if posts %}
+{% comment %} {% if posts %}
     <ul>
         {% for post in posts %}
             <li>
@@ -30,4 +36,4 @@
             </li>
         {% endfor %}
     </ul>
-{% endif %}
+{% endif %} {% endcomment %}

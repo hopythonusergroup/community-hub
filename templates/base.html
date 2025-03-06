@@ -1,26 +1,31 @@
+{% load static tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Community Hub{% endblock title %}</title>
+    {% tailwind_css %}
 </head>
-<body>
-    <header>
-        <h1>Community Hub</h1>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between px-4">
+            <h1 class="text-2xl font-bold">Community Hub</h1>
         <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'create_blog' %}">Create Post</a></li>
+            <ul class="flex space-x-4">
+                <li><a href="{% url 'blog_list' %}" class="hover:underline">Home</a></li>
+                <li><a href="{% url 'create_blog' %}" class="hover:underline">Create Post</a></li>
             </ul>
         </nav>
+        </div>
     </header>
     
-    <main>
+    <main class="container mx-auto mt-8 px-4">
         {% block content %}{% endblock content %}
     </main>
 
-    <footer>
+    <footer class="bg-gray-800 text-white text-center py-4 mt-10">
         <p>&copy; 2025 Community Hub - Python User Group Ho project. All rights reserved.</p>
     </footer>
 </body>
