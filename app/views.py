@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 from app.models import BlogPost
 
@@ -8,6 +9,8 @@ from app.forms import BlogPostForm
 
 
 # Create your views here.
+
+
 def blog_list(request):
     posts = BlogPost.objects.all().order_by("-created_at")
     return render(request, "app/blog_list.html", {"posts": posts})
@@ -18,6 +21,7 @@ def blog_detail(request, post_id):
     return render(request, "app/blog_detail.html", {"post": post})
 
 
+@login_required  # restrict access to authenticated users only
 def create_blog(request):
     if request.method == "POST":
         form = BlogPostForm(request.POST)
@@ -30,7 +34,7 @@ def create_blog(request):
 
             # newblog = {"title": title, "content": content, "status": status}
 
-            newpost = BlogPost(title=title, content=content, status=status)
+            newpost = BlogPost(title=title, content=content, status=status, author=request.user)
             newpost.save()  # this actually saves the new post to DB
 
             # redirect to blog list page
@@ -41,6 +45,7 @@ def create_blog(request):
     return render(request, "app/create_blog.html", {"form": form})
 
 
+@login_required  # restrict access to authenticated users only
 def update_blog(request, post_id):
     post = BlogPost.objects.get(id=post_id)
 
@@ -64,6 +69,7 @@ def update_blog(request, post_id):
     return render(request, "app/update_blog.html", {"form": form, "post": post})
 
 
+@login_required  # restrict access to authenticated users only
 def delete_blog(request, post_id):
     post = BlogPost.objects.get(id=post_id)
 
