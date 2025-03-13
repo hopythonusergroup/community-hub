@@ -12,7 +12,7 @@ from app.forms import BlogPostForm
 
 
 def blog_list(request):
-    posts = BlogPost.objects.all().order_by("-created_at")
+    posts = BlogPost.objects.filter(status="published").all().order_by("-created_at")
     return render(request, "app/blog_list.html", {"posts": posts})
 
 
@@ -79,3 +79,8 @@ def delete_blog(request, post_id):
         return redirect("blog_list")
 
     return render(request, "app/delete_blog.html", {"post": post})
+
+
+def dashboard(request):
+    posts = BlogPost.objects.filter(author=request.user).order_by("-created_at")
+    return render(request, "account/dashboard.html", {"posts": posts})
