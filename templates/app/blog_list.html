@@ -2,8 +2,6 @@
 
 {% block title %}Post list | Community Hub{% endblock title %}
 
-{% comment %} <a href="{% url "create_blog" %}">Create a new post</a> {% endcomment %}
-
 {% block content %}
     <h2 class="text-3xl font-bold mb-6">Blog Posts</h2>
     
@@ -30,14 +28,3 @@
         </div>
     {% endif %}
 {% endblock content %}
-
-
-{% comment %} {% if posts %}
-    <ul>
-        {% for post in posts %}
-            <li>
-                <a href="{% url "blog_detail" post_id=post.id %}">{{ post.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %} {% endcomment %}
